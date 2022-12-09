@@ -1,6 +1,6 @@
 /*
- * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2020  <copyright holder> <email>
+ * Speckle2Speckle based despeckling filter for TerraSAR-X Spotlight mode
+ * Copyright (C) 2020  Andreas Ley <mail@andreas-ley.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
