@@ -1,5 +1,5 @@
 #!/bin/sh
-mkdir buildRel
-cd buildRel
+mkdir buildRelease
+cd buildRelease
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j 2
