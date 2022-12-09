@@ -1,0 +1,30 @@
+{
+	"name": "C++",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+	},
+	// Settings to be applied to Visual Studio Code.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"C_Cpp.default.includePath": [
+			"${default}"
+		],
+		"C_Cpp.default.configurationProvider": "ms-vscode.ms-vscode.cmake-tools"
+	},
+	// Visual Studio Code extensions (plugins) to be installed.
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-vscode.cmake-tools"
+	],
+	// Command to be executed after the container is created.
+	"onCreateCommand": ".devcontainer/post.sh",
+	"customizations": {
+	"codespaces": {
+		"openFiles": [
+			"source/main.cpp",
+			"readme.md"
+		]
+	}
+	}
+}
