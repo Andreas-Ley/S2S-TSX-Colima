@@ -17,6 +17,9 @@ If you use this in a publication, please consider citing us (see section *Credit
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=570506234)
 
+Teaser image showing crops of a TerraSAR-X image before and after filtering (the image captures Popocatépetl volcano in Mexico, and is published in the Supplementary Material of Valade et al., Nature Communications): 
+<img src="teaser.jpg" alt="A collage showing crops of a TSX image before and after filtering" width="400">
+
 ## Dependencies
 
 The code is CPU only and thus does not need a GPU or associated drivers. It does, however, need AVX extensions which should be present in every x86(_64) cpu from the last decade. If in doubt, check with:
@@ -76,7 +79,7 @@ will produce these three files:
 TerraSAR-X raw products used for training were provided by the German Aerospace Center (DLR) to Prof. Thomas R. Walter (GFZ-Potsdam), under the project TSX-ID 1505. 
 
 ## Credits
-The filter was developped as part of a publication by Valade et al., which is currently under review for the journal <i>Nature Communications</i> (2022-dec). Details and complete reference to the publication will be provided here in case of acceptance. 
+The filter (version 1.0) was developped as part of a publication by Valade et al., accepted for publication in journal <i>Nature Communications</i> (2023-apr). Complete reference to the paper will be provided here in upon its publication. Version 1.0 of this code is archived on Zenodo, and therefore is citable through it own DOI.
 
 ## License
 
