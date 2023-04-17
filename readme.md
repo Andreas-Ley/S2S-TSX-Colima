@@ -81,6 +81,7 @@ TerraSAR-X raw products used for training were provided by the German Aerospace 
 ## Credits
 The filter (version 1.0) was developped as part of a publication by Valade et al., accepted for publication in journal <i>Nature Communications</i> (2023-apr). Complete reference to the paper will be provided here in upon its publication. Version 1.0 of this code is archived on Zenodo, and therefore is citable through it own DOI.
 
+
 ## License
 
     Speckle2Speckle based despeckling filter for TerraSAR-X Spotlight mode
