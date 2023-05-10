@@ -17,7 +17,7 @@ If you use this in a publication, please consider citing us (see section *Credit
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=570506234)
 
-Teaser image showing crops of a TerraSAR-X image before and after filtering (the image captures Popocatépetl volcano in Mexico, and is published in the Supplementary Material of Valade et al., Nature Communications): 
+Teaser image showing crops of a TerraSAR-X image before and after filtering (the image captures Popocatépetl volcano in Mexico, and is published in the Supplementary Material of <a href="https://doi.org/10.1038/s41467-023-38386-9" target="_blank">Valade et al. 2023 (Nature Communications)</a>): 
 <img src="teaser.jpg" alt="A collage showing crops of a TSX image before and after filtering" width="400">
 
 ## Dependencies
@@ -79,7 +79,11 @@ will produce these three files:
 TerraSAR-X raw products used for training were provided by the German Aerospace Center (DLR) to Prof. Thomas R. Walter (GFZ-Potsdam), under the project TSX-ID 1505. 
 
 ## Credits
-The filter (version 1.0) was developped as part of a publication by Valade et al., accepted for publication in journal <i>Nature Communications</i> (2023-apr). Complete reference to the paper will be provided here in upon its publication. Version 1.0 of this code is archived on Zenodo, and therefore is citable through it own DOI.
+The filter (version 1.0) was developed as part of the publication by Valade et al. (2023):  
+Valade S., Coppola D., Campion R., Ley A., Boulesteix T., Taquet N., Legrand D., Laiolo M., Walter T. R., De la Cruz-Reyna S. (2023) "Lava dome cycles reveal rise and fall of magma column at popocatépetl volcano", Nature Communications, doi: <a href="https://doi.org/10.1038/s41467-023-38386-9" target="_blank">10.1038/s41467-023-38386-9</a>  
+
+The code version used in the publication is archived on Zenodo and citable as:  
+Ley, A. & Valade, S. (2023) "Andreas-Ley/S2S-TSX-Colima: Version v1.0.4", doi: <a href="https://zenodo.org/record/7838864" target="_blank">10.5281/zenodo.7838864</a>.
 
 
 ## License
