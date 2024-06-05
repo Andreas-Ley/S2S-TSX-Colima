@@ -19,6 +19,7 @@
 #include "S2S_net_TsX_network.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 #include <immintrin.h>
 
@@ -1186,77 +1187,77 @@ void S2S_net_TsX_network_forward(const Tensor *input, Tensor *output, ScratchBuf
     Tensor t_2 = allocateTensor(512, 512, 1, 8, 16); // 131072 KB
     Tensor t_3 = allocateTensor(512, 512, 1, 16, 16); // 262144 KB
     // 976 MB total
-    conv_N16_5x5x1_CI1_CO8_padd2x2x0(&t_2, input, S2S_net_TsX_in_conv_weights, S2S_net_TsX_in_conv_bias);
-    conv_N16_2x2x1_CI8_CO16_stride2x2x1(&t_5, &t_2, S2S_net_TsX_S2S_B_0_DS_p_weights, S2S_net_TsX_S2S_B_0_DS_p_bias);
+    conv_N16_5x5x1_CI1_CO8_padd2x2x0(&t_2, input, (const float*) S2S_net_TsX_in_conv_weights, (const float*) S2S_net_TsX_in_conv_bias);
+    conv_N16_2x2x1_CI8_CO16_stride2x2x1(&t_5, &t_2, (const float*) S2S_net_TsX_S2S_B_0_DS_p_weights, (const float*) S2S_net_TsX_S2S_B_0_DS_p_bias);
     ConcatReLU(&t_6, &t_5);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, S2S_net_TsX_S2S__D_B_0_0_0_p_weights, S2S_net_TsX_S2S__D_B_0_0_0_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, (const float*) S2S_net_TsX_S2S__D_B_0_0_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_0_0_0_p_bias);
     ConcatReLU(&t_6, &t_4);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, S2S_net_TsX_S2S__D_B_0_0_1_p_weights, S2S_net_TsX_S2S__D_B_0_0_1_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, (const float*) S2S_net_TsX_S2S__D_B_0_0_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_0_0_1_p_bias);
     addTensors(&t_5, &t_5, &t_4);
     ConcatReLU(&t_6, &t_5);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, S2S_net_TsX_S2S__D_B_0_1_0_p_weights, S2S_net_TsX_S2S__D_B_0_1_0_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, (const float*) S2S_net_TsX_S2S__D_B_0_1_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_0_1_0_p_bias);
     ConcatReLU(&t_6, &t_4);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, S2S_net_TsX_S2S__D_B_0_1_1_p_weights, S2S_net_TsX_S2S__D_B_0_1_1_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_4, &t_6, (const float*) S2S_net_TsX_S2S__D_B_0_1_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_0_1_1_p_bias);
     addTensors(&t_5, &t_5, &t_4);
-    conv_N16_2x2x1_CI16_CO32_stride2x2x1(&t_8, &t_5, S2S_net_TsX_S2S_B_1_DS_p_weights, S2S_net_TsX_S2S_B_1_DS_p_bias);
+    conv_N16_2x2x1_CI16_CO32_stride2x2x1(&t_8, &t_5, (const float*) S2S_net_TsX_S2S_B_1_DS_p_weights, (const float*) S2S_net_TsX_S2S_B_1_DS_p_bias);
     ConcatReLU(&t_9, &t_8);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, S2S_net_TsX_S2S__D_B_1_0_0_p_weights, S2S_net_TsX_S2S__D_B_1_0_0_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, (const float*) S2S_net_TsX_S2S__D_B_1_0_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_1_0_0_p_bias);
     ConcatReLU(&t_9, &t_7);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, S2S_net_TsX_S2S__D_B_1_0_1_p_weights, S2S_net_TsX_S2S__D_B_1_0_1_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, (const float*) S2S_net_TsX_S2S__D_B_1_0_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_1_0_1_p_bias);
     addTensors(&t_8, &t_8, &t_7);
     ConcatReLU(&t_9, &t_8);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, S2S_net_TsX_S2S__D_B_1_1_0_p_weights, S2S_net_TsX_S2S__D_B_1_1_0_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, (const float*) S2S_net_TsX_S2S__D_B_1_1_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_1_1_0_p_bias);
     ConcatReLU(&t_9, &t_7);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, S2S_net_TsX_S2S__D_B_1_1_1_p_weights, S2S_net_TsX_S2S__D_B_1_1_1_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_7, &t_9, (const float*) S2S_net_TsX_S2S__D_B_1_1_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_1_1_1_p_bias);
     addTensors(&t_8, &t_8, &t_7);
-    conv_N16_2x2x1_CI32_CO64_stride2x2x1(&t_10, &t_8, S2S_net_TsX_S2S_B_2_DS_p_weights, S2S_net_TsX_S2S_B_2_DS_p_bias);
+    conv_N16_2x2x1_CI32_CO64_stride2x2x1(&t_10, &t_8, (const float*) S2S_net_TsX_S2S_B_2_DS_p_weights, (const float*) S2S_net_TsX_S2S_B_2_DS_p_bias);
     ConcatReLU(&t_12, &t_10);
-    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, S2S_net_TsX_S2S__D_B_2_0_0_p_weights, S2S_net_TsX_S2S__D_B_2_0_0_p_bias);
+    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, (const float*) S2S_net_TsX_S2S__D_B_2_0_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_2_0_0_p_bias);
     ConcatReLU(&t_12, &t_11);
-    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, S2S_net_TsX_S2S__D_B_2_0_1_p_weights, S2S_net_TsX_S2S__D_B_2_0_1_p_bias);
+    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, (const float*) S2S_net_TsX_S2S__D_B_2_0_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_2_0_1_p_bias);
     addTensors(&t_10, &t_10, &t_11);
     ConcatReLU(&t_12, &t_10);
-    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, S2S_net_TsX_S2S__D_B_2_1_0_p_weights, S2S_net_TsX_S2S__D_B_2_1_0_p_bias);
+    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, (const float*) S2S_net_TsX_S2S__D_B_2_1_0_p_weights, (const float*) S2S_net_TsX_S2S__D_B_2_1_0_p_bias);
     ConcatReLU(&t_12, &t_11);
-    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, S2S_net_TsX_S2S__D_B_2_1_1_p_weights, S2S_net_TsX_S2S__D_B_2_1_1_p_bias);
+    conv_N16_3x3x1_CI128_CO64_padd1x1x0(&t_11, &t_12, (const float*) S2S_net_TsX_S2S__D_B_2_1_1_p_weights, (const float*) S2S_net_TsX_S2S__D_B_2_1_1_p_bias);
     addTensors(&t_10, &t_10, &t_11);
-    transp_conv_N16_2x2x1_CI64_CO32_stride2x2x1(&t_7, &t_10, S2S_net_TsX_S2S_B_2_US_p_weights, S2S_net_TsX_S2S_B_2_US_p_bias);
+    transp_conv_N16_2x2x1_CI64_CO32_stride2x2x1(&t_7, &t_10, (const float*) S2S_net_TsX_S2S_B_2_US_p_weights, (const float*) S2S_net_TsX_S2S_B_2_US_p_bias);
     addTensors(&t_7, &t_7, &t_8);
     ConcatReLU(&t_9, &t_7);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, S2S_net_TsX_S2S__U_B_2_0_0_p_weights, S2S_net_TsX_S2S__U_B_2_0_0_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, (const float*) S2S_net_TsX_S2S__U_B_2_0_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_2_0_0_p_bias);
     ConcatReLU(&t_9, &t_8);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, S2S_net_TsX_S2S__U_B_2_0_1_p_weights, S2S_net_TsX_S2S__U_B_2_0_1_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, (const float*) S2S_net_TsX_S2S__U_B_2_0_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_2_0_1_p_bias);
     addTensors(&t_7, &t_7, &t_8);
     ConcatReLU(&t_9, &t_7);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, S2S_net_TsX_S2S__U_B_2_1_0_p_weights, S2S_net_TsX_S2S__U_B_2_1_0_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, (const float*) S2S_net_TsX_S2S__U_B_2_1_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_2_1_0_p_bias);
     ConcatReLU(&t_9, &t_8);
-    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, S2S_net_TsX_S2S__U_B_2_1_1_p_weights, S2S_net_TsX_S2S__U_B_2_1_1_p_bias);
+    conv_N16_3x3x1_CI64_CO32_padd1x1x0(&t_8, &t_9, (const float*) S2S_net_TsX_S2S__U_B_2_1_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_2_1_1_p_bias);
     addTensors(&t_7, &t_7, &t_8);
-    transp_conv_N16_2x2x1_CI32_CO16_stride2x2x1(&t_4, &t_7, S2S_net_TsX_S2S_B_1_US_p_weights, S2S_net_TsX_S2S_B_1_US_p_bias);
+    transp_conv_N16_2x2x1_CI32_CO16_stride2x2x1(&t_4, &t_7, (const float*) S2S_net_TsX_S2S_B_1_US_p_weights, (const float*) S2S_net_TsX_S2S_B_1_US_p_bias);
     addTensors(&t_4, &t_4, &t_5);
     ConcatReLU(&t_6, &t_4);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, S2S_net_TsX_S2S__U_B_1_0_0_p_weights, S2S_net_TsX_S2S__U_B_1_0_0_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, (const float*) S2S_net_TsX_S2S__U_B_1_0_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_1_0_0_p_bias);
     ConcatReLU(&t_6, &t_5);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, S2S_net_TsX_S2S__U_B_1_0_1_p_weights, S2S_net_TsX_S2S__U_B_1_0_1_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, (const float*) S2S_net_TsX_S2S__U_B_1_0_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_1_0_1_p_bias);
     addTensors(&t_4, &t_4, &t_5);
     ConcatReLU(&t_6, &t_4);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, S2S_net_TsX_S2S__U_B_1_1_0_p_weights, S2S_net_TsX_S2S__U_B_1_1_0_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, (const float*) S2S_net_TsX_S2S__U_B_1_1_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_1_1_0_p_bias);
     ConcatReLU(&t_6, &t_5);
-    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, S2S_net_TsX_S2S__U_B_1_1_1_p_weights, S2S_net_TsX_S2S__U_B_1_1_1_p_bias);
+    conv_N16_3x3x1_CI32_CO16_padd1x1x0(&t_5, &t_6, (const float*) S2S_net_TsX_S2S__U_B_1_1_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_1_1_1_p_bias);
     addTensors(&t_4, &t_4, &t_5);
-    transp_conv_N16_2x2x1_CI16_CO8_stride2x2x1(&t_1, &t_4, S2S_net_TsX_S2S_B_0_US_p_weights, S2S_net_TsX_S2S_B_0_US_p_bias);
+    transp_conv_N16_2x2x1_CI16_CO8_stride2x2x1(&t_1, &t_4, (const float*) S2S_net_TsX_S2S_B_0_US_p_weights, (const float*) S2S_net_TsX_S2S_B_0_US_p_bias);
     addTensors(&t_1, &t_1, &t_2);
     ConcatReLU(&t_3, &t_1);
-    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, S2S_net_TsX_S2S__U_B_0_0_0_p_weights, S2S_net_TsX_S2S__U_B_0_0_0_p_bias);
+    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, (const float*) S2S_net_TsX_S2S__U_B_0_0_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_0_0_0_p_bias);
     ConcatReLU(&t_3, &t_2);
-    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, S2S_net_TsX_S2S__U_B_0_0_1_p_weights, S2S_net_TsX_S2S__U_B_0_0_1_p_bias);
+    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, (const float*) S2S_net_TsX_S2S__U_B_0_0_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_0_0_1_p_bias);
     addTensors(&t_1, &t_1, &t_2);
     ConcatReLU(&t_3, &t_1);
-    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, S2S_net_TsX_S2S__U_B_0_1_0_p_weights, S2S_net_TsX_S2S__U_B_0_1_0_p_bias);
+    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, (const float*) S2S_net_TsX_S2S__U_B_0_1_0_p_weights, (const float*) S2S_net_TsX_S2S__U_B_0_1_0_p_bias);
     ConcatReLU(&t_3, &t_2);
-    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, S2S_net_TsX_S2S__U_B_0_1_1_p_weights, S2S_net_TsX_S2S__U_B_0_1_1_p_bias);
+    conv_N16_3x3x1_CI16_CO8_padd1x1x0(&t_2, &t_3, (const float*) S2S_net_TsX_S2S__U_B_0_1_1_p_weights, (const float*) S2S_net_TsX_S2S__U_B_0_1_1_p_bias);
     addTensors(&t_1, &t_1, &t_2);
-    conv_N16_5x5x1_CI8_CO1_padd2x2x0(output, &t_1, S2S_net_TsX_out_conv_weights, S2S_net_TsX_out_conv_bias);
+    conv_N16_5x5x1_CI8_CO1_padd2x2x0(output, &t_1, (const float*) S2S_net_TsX_out_conv_weights, (const float*) S2S_net_TsX_out_conv_bias);
     freeTensor(&t_11);
     freeTensor(&t_10);
     freeTensor(&t_12);
