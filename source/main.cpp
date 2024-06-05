@@ -282,6 +282,7 @@ int main(int argc, char **argv)
 {
     if (argc < 3) {
         std::cout << "Usage: ./applicationCPU geoTiffInputFile outputFilePrefix" << std::endl;
+        std::cout << "   OR: ./applicationCPU geoTiffInputFile outputFilePrefix --intensity" << std::endl;
         return 0;
     }
     
@@ -289,29 +290,47 @@ int main(int argc, char **argv)
     
         std::string filename(argv[1]);
         std::string outputPrefix(argv[2]);
+        bool inputIsComplexValued = true;
+        if (argc == 4 && std::string(argv[3]) == "--intensity")
+            inputIsComplexValued = false;
         
-        FloatImage2f inputImage;
-        unsigned channels[] = {0, 1};
         std::cout << "Opening image " << filename << std::endl;
         TIFF *tif = TIFFOpen(filename.c_str(), "r");
         if (tif == nullptr)
             throw std::runtime_error(std::string("Could not read tif file: ") + filename);
         try {
-            std::cout << "Reading image" << std::endl;
-            readFile<2>(tif, channels, inputImage);
-            
-
-            std::cout << "Computing log intensities" << std::endl;
             FloatImage1f inputLogIntensity;
-            inputLogIntensity.allocate(inputImage.getWidth(), inputImage.getHeight());
-            for (unsigned y = 0; y < inputImage.getHeight(); y++)
-                for (unsigned x = 0; x < inputImage.getWidth(); x++) {
-                    float real = inputImage(x, y, 0);
-                    float imag = inputImage(x, y, 1);
-                        
-                    float itensity = real*real + imag*imag;
-                    inputLogIntensity(x, y, 0) = std::log(1+itensity);
-                }
+
+
+            std::cout << "Reading image" << std::endl;
+            if (inputIsComplexValued) {
+                FloatImage2f inputImage;
+                unsigned channels[] = {0, 1};
+                readFile<2>(tif, channels, inputImage);
+                
+                std::cout << "Computing log intensities" << std::endl;
+                inputLogIntensity.allocate(inputImage.getWidth(), inputImage.getHeight());
+                for (unsigned y = 0; y < inputImage.getHeight(); y++)
+                    for (unsigned x = 0; x < inputImage.getWidth(); x++) {
+                        float real = inputImage(x, y, 0);
+                        float imag = inputImage(x, y, 1);
+                            
+                        float itensity = real*real + imag*imag;
+                        inputLogIntensity(x, y, 0) = std::log(1+itensity);
+                    }
+            } else {
+                FloatImage1f inputImage;
+                unsigned channels[] = {0};
+                readFile<1>(tif, channels, inputImage);
+                
+                std::cout << "Computing log intensities" << std::endl;
+                inputLogIntensity.allocate(inputImage.getWidth(), inputImage.getHeight());
+                for (unsigned y = 0; y < inputImage.getHeight(); y++)
+                    for (unsigned x = 0; x < inputImage.getWidth(); x++) {
+                        float itensity = inputImage(x, y, 0);
+                        inputLogIntensity(x, y, 0) = std::log(1+itensity);
+                    }
+            }
                 
                 
             std::string inputPreviewFilename = outputPrefix + "_before.tif";
